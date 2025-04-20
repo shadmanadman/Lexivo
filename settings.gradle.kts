@@ -29,5 +29,14 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
-include(":server")
 include(":shared")
+// Server
+include(":server")
+include(":server:mlgate")
+include(":server:feedback")
+include(":server:auth")
+include(":server:history")
+include(":server:review")
+include(":server:notification")
+include(":server:team")
+include(":server:user")
