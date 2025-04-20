@@ -28,7 +28,10 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+// Client
+include(":userApp")
+include(":adminApp")
+// Shared
 include(":shared")
 // Server
 include(":server")
