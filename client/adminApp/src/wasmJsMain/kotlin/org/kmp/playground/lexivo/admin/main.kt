@@ -1,4 +1,4 @@
-package org.kmp.playground.lexivo
+package org.kmp.playground.lexivo.admin
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport

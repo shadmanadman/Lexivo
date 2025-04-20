@@ -79,16 +79,17 @@ kotlin {
 }
 
 android {
-    namespace = "org.kmp.playground.lexivo"
+    namespace = "org.kmp.playground.lexivo.admin"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "org.kmp.playground.lexivo"
+        applicationId = "org.kmp.playground.lexivo.admin"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
+    dynamicFeatures += mutableListOf()
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -111,11 +112,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "org.kmp.playground.lexivo.MainKt"
+        mainClass = "org.kmp.playground.lexivo.admin.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "org.kmp.playground.lexivo"
+            packageName = "org.kmp.playground.lexivo.admin"
             packageVersion = "1.0.0"
         }
     }

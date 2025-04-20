@@ -1,4 +1,4 @@
-package org.kmp.playground.lexivo
+package org.kmp.playground.lexivo.core
 
 import androidx.compose.ui.window.ComposeUIViewController
 

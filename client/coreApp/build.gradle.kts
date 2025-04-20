@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
 }
@@ -78,15 +78,12 @@ kotlin {
 }
 
 android {
-    namespace = "org.kmp.playground.lexivo"
+    namespace = "org.kmp.playground.lexivo.core"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "org.kmp.playground.lexivo"
         minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        testOptions.targetSdk = libs.versions.android.targetSdk.get().toInt()
     }
     packaging {
         resources {
@@ -110,11 +107,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "org.kmp.playground.lexivo.MainKt"
+        mainClass = "org.kmp.playground.lexivo.core.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "org.kmp.playground.lexivo"
+            packageName = "org.kmp.playground.lexivo.core"
             packageVersion = "1.0.0"
         }
     }

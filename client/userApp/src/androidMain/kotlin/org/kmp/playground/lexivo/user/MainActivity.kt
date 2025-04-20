@@ -1,4 +1,4 @@
-package org.kmp.playground.lexivo
+package org.kmp.playground.lexivo.user
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

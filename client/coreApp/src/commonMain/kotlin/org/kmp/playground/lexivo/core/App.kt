@@ -1,4 +1,4 @@
-package org.kmp.playground.lexivo
+package org.kmp.playground.lexivo.core
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -8,5 +8,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     MaterialTheme {
+
     }
 }
+
+fun String.test(): String = this + "test"
