@@ -1,4 +1,4 @@
-package org.kmp.playground.event.management.full.stack.features.artists.db.dao
+package org.kmp.playground.lexivo.user.db.dao
 
 import com.mongodb.MongoException
 import com.mongodb.client.model.Filters
@@ -9,25 +9,25 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.toList
 import org.bson.BsonValue
 import org.bson.types.ObjectId
-import org.kmp.playground.event.management.full.stack.features.artists.db.entity.Artists
+import org.kmp.playground.lexivo.user.db.entity.UserEntity
 
-class ArtistDaoImpl(private val mongoDatabase: MongoDatabase) : ArtistDao {
+class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
     companion object {
         const val ARTISTS_COLLECTION = "artists"
     }
 
-    override suspend fun findAll(): List<Artists> =
-        mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION).find().toList()
+    override suspend fun findAll(): List<UserEntity> =
+        mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION).find().toList()
 
-    override suspend fun findById(objectId: ObjectId): Artists? =
-        mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION).withDocumentClass<Artists>()
+    override suspend fun findById(objectId: ObjectId): UserEntity? =
+        mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION).withDocumentClass<UserEntity>()
             .find(Filters.eq("_id", objectId))
             .firstOrNull()
 
 
-    override suspend fun insertOne(artists: Artists): BsonValue? {
+    override suspend fun insertOne(artists: UserEntity): BsonValue? {
         try {
-            val result = mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION).insertOne(
+            val result = mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION).insertOne(
                 artists
             )
 
@@ -41,7 +41,7 @@ class ArtistDaoImpl(private val mongoDatabase: MongoDatabase) : ArtistDao {
 
     override suspend fun deleteById(objectId: ObjectId): Long {
         try {
-            val result = mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION)
+            val result = mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION)
                 .deleteOne(Filters.eq("_id", objectId))
             return result.deletedCount
         } catch (e: MongoException) {
@@ -51,18 +51,25 @@ class ArtistDaoImpl(private val mongoDatabase: MongoDatabase) : ArtistDao {
         return 0
     }
 
-    override suspend fun updateOne(objectId: ObjectId, artists: Artists): Long {
+    override suspend fun updateOne(objectId: ObjectId, artists: UserEntity): Long {
         try {
             val query = Filters.eq("_id", objectId)
             val updates = Updates.combine(
-                Updates.set(Artists::artistName.name, artists.artistName),
-                Updates.set(Artists::artistAvatar.name, artists.artistAvatar)
+                Updates.set(UserEntity::name.name, artists.name),
+                Updates.set(UserEntity::email.name, artists.email),
+                Updates.set(UserEntity::provider.name, artists.provider),
+                Updates.set(UserEntity::avatar.name, artists.avatar),
+                Updates.set(UserEntity::providerId.name, artists.providerId),
+                Updates.set(UserEntity::role.name, artists.role),
+                Updates.set(UserEntity::hashedPassword.name, artists.hashedPassword),
+                Updates.set(UserEntity::teamId.name, artists.teamId),
+                Updates.set(UserEntity::updatedAt.name, artists.updatedAt)
             )
 
             val options = UpdateOptions().upsert(true)
 
             val result =
-                mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION)
+                mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION)
                     .updateOne(query, updates, options)
 
             return result.modifiedCount
