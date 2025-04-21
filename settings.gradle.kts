@@ -37,6 +37,7 @@ include(":client:coreApp")
 include(":shared")
 // Server
 include(":server")
+include(":server:core")
 include(":server:mlgate")
 include(":server:feedback")
 include(":server:auth")

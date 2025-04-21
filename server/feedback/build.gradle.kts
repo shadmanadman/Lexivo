@@ -4,18 +4,13 @@ plugins {
     application
 }
 
-group = "org.kmp.playground.lexivo"
+group = "org.kmp.playground.lexivo.server.feedback"
 version = "1.0.0"
 application {
-    mainClass.set("org.kmp.playground.lexivo.ApplicationKt")
+    mainClass.set("org.kmp.playground.lexivo.feedback.ApplicationKt")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
 }
 
 dependencies {
-    implementation(projects.shared)
-    implementation(libs.logback)
-    implementation(libs.ktor.server.core)
-    implementation(libs.ktor.server.netty)
-    testImplementation(libs.ktor.server.tests)
-    testImplementation(libs.kotlin.test.junit)
+    implementation(projects.server.core)
 }
