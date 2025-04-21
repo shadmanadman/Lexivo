@@ -18,4 +18,7 @@ dependencies {
     api(libs.ktor.server.netty)
     testApi(libs.ktor.server.tests)
     testApi(libs.kotlin.test.junit)
+
+    // MongoDB
+    api(libs.mongodb.driver)
 }
