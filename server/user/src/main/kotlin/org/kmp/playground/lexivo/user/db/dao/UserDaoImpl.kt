@@ -25,13 +25,13 @@ class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
             .firstOrNull()
 
 
-    override suspend fun insertOne(artists: UserEntity): BsonValue? {
+    override suspend fun insertOne(artists: UserEntity): String? {
         try {
             val result = mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION).insertOne(
                 artists
             )
 
-            return result.insertedId
+            return result.insertedId?.asObjectId()?.value.toString()
         } catch (e: MongoException) {
             System.err.println("Unable to insert due to an error: $e")
         }
@@ -39,19 +39,19 @@ class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
         return null
     }
 
-    override suspend fun deleteById(objectId: ObjectId): Long {
+    override suspend fun deleteById(objectId: ObjectId): String {
         try {
             val result = mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION)
                 .deleteOne(Filters.eq("_id", objectId))
-            return result.deletedCount
+            return result.deletedCount.toString()
         } catch (e: MongoException) {
             System.err.println("Unable to delete due to an error: $e")
         }
 
-        return 0
+        return "-1"
     }
 
-    override suspend fun updateOne(objectId: ObjectId, artists: UserEntity): Long {
+    override suspend fun updateOne(objectId: ObjectId, artists: UserEntity): String {
         try {
             val query = Filters.eq("_id", objectId)
             val updates = Updates.combine(
@@ -72,12 +72,12 @@ class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
                 mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION)
                     .updateOne(query, updates, options)
 
-            return result.modifiedCount
+            return result.modifiedCount.toString()
         } catch (e: MongoException) {
             System.err.println("Unable to update due to an error: $e")
         }
 
-        return 0
+        return "-1"
     }
 
 }

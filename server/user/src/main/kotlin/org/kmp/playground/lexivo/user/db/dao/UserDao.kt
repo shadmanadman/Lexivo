@@ -10,9 +10,9 @@ interface UserDao {
 
     suspend fun findById(objectId: ObjectId): UserEntity?
 
-    suspend fun insertOne(user: UserEntity): BsonValue?
+    suspend fun insertOne(user: UserEntity): String?
 
-    suspend fun deleteById(objectId: ObjectId): Long
+    suspend fun deleteById(objectId: ObjectId): String
 
-    suspend fun updateOne(objectId: ObjectId, user: UserEntity): Long
+    suspend fun updateOne(objectId: ObjectId, user: UserEntity): String
 }

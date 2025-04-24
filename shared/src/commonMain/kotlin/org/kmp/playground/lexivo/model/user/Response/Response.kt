@@ -1,10 +1,11 @@
 package org.kmp.playground.lexivo.model.user.Response
 
+
 data class UserResponse(
-    val id: String,
+    val id: String?,
     val email: String,
     val name: String,
-    val role: UserRole,
+    val role: UserRole= UserRole.USER,
     val teamId: String? = null,
     val createdAt: String,
     val updatedAt: String

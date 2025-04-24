@@ -16,11 +16,13 @@ dependencies {
     api(libs.logback)
     api(libs.ktor.server.core)
     api(libs.ktor.server.netty)
-    testApi(libs.ktor.server.tests)
-    testApi(libs.kotlin.test.junit)
-
+    api(libs.ktor.server.test.host)
+    api(libs.kotlin.test.junit)
+    api(libs.ktor.json)
+    api(libs.kotlin.test)
     // MongoDB
     api(libs.mongodb.driver)
     // GraphQL
     api(libs.graphql.kotlin.server)
+    api(libs.graphql.kotlin.ktor.server)
 }
