@@ -7,27 +7,26 @@ import com.mongodb.client.model.Updates
 import com.mongodb.kotlin.client.coroutine.MongoDatabase
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.toList
-import org.bson.BsonValue
 import org.bson.types.ObjectId
 import org.kmp.playground.lexivo.user.db.entity.UserEntity
 
 class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
     companion object {
-        const val ARTISTS_COLLECTION = "artists"
+        const val USER_COLLECTION = "user"
     }
 
     override suspend fun findAll(): List<UserEntity> =
-        mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION).find().toList()
+        mongoDatabase.getCollection<UserEntity>(USER_COLLECTION).find().toList()
 
     override suspend fun findById(objectId: ObjectId): UserEntity? =
-        mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION).withDocumentClass<UserEntity>()
+        mongoDatabase.getCollection<UserEntity>(USER_COLLECTION).withDocumentClass<UserEntity>()
             .find(Filters.eq("_id", objectId))
             .firstOrNull()
 
 
     override suspend fun insertOne(artists: UserEntity): String? {
         try {
-            val result = mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION).insertOne(
+            val result = mongoDatabase.getCollection<UserEntity>(USER_COLLECTION).insertOne(
                 artists
             )
 
@@ -41,7 +40,7 @@ class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
 
     override suspend fun deleteById(objectId: ObjectId): String {
         try {
-            val result = mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION)
+            val result = mongoDatabase.getCollection<UserEntity>(USER_COLLECTION)
                 .deleteOne(Filters.eq("_id", objectId))
             return result.deletedCount.toString()
         } catch (e: MongoException) {
@@ -69,7 +68,7 @@ class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
             val options = UpdateOptions().upsert(true)
 
             val result =
-                mongoDatabase.getCollection<UserEntity>(ARTISTS_COLLECTION)
+                mongoDatabase.getCollection<UserEntity>(USER_COLLECTION)
                     .updateOne(query, updates, options)
 
             return result.modifiedCount.toString()
