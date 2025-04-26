@@ -19,6 +19,7 @@ object DatabaseCore {
     val userDb: MongoDatabase get() = getDatabase("userDatabase")
     val reviewDb: MongoDatabase get() = getDatabase("reviewDatabase")
     val notificationDb: MongoDatabase get() = getDatabase("notificationDatabase")
+    val feedbackDb: MongoDatabase get() = getDatabase("feedbackDatabase")
     val authDb: MongoDatabase get() = getDatabase("authDatabase")
     val teamDb: MongoDatabase get() = getDatabase("teamDatabase")
 
