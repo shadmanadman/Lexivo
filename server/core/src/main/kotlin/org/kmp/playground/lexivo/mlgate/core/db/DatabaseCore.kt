@@ -18,6 +18,7 @@ object DatabaseCore {
     // Optional helper for common databases
     val userDb: MongoDatabase get() = getDatabase("userDatabase")
     val reviewDb: MongoDatabase get() = getDatabase("reviewDatabase")
+    val notificationDb: MongoDatabase get() = getDatabase("notificationDatabase")
     val authDb: MongoDatabase get() = getDatabase("authDatabase")
     val teamDb: MongoDatabase get() = getDatabase("teamDatabase")
 

@@ -10,7 +10,11 @@ application {
     mainClass.set("org.kmp.playground.lexivo.notification.ApplicationKt")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
 }
-
+sourceSets {
+    test {
+        kotlin.srcDirs("src/test")
+    }
+}
 dependencies {
     implementation(projects.server.core)
 }
