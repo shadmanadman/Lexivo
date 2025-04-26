@@ -69,7 +69,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(projects.shared)
-            implementation(project(":client:coreApp"))
+
+            implementation(projects.client.coreApp)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

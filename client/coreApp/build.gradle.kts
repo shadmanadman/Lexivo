@@ -56,23 +56,41 @@ kotlin {
         val desktopMain by getting
         
         androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
+            api(compose.preview)
+            api(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(projects.shared)
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.material)
+            api(compose.ui)
+            api(compose.components.resources)
+            api(compose.components.uiToolingPreview)
+            api(libs.androidx.lifecycle.viewmodel)
+            api(libs.androidx.lifecycle.runtime.compose)
+
+            // Shared
+            api(projects.shared)
+
+            // Ktor
+            api(libs.ktor.client.core)
+            api(libs.ktor.client.serialization)
+            api(libs.ktor.json)
+            api(libs.ktor.client.negotiation)
+            api(libs.ktor.client.logging)
+
+            // Decompose
+            api(libs.decompose)
+            api(libs.decompose.extensions)
+            api(libs.decompose.essenty)
         }
         desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutines.swing)
+            api(compose.desktop.currentOs)
+            api(libs.kotlinx.coroutines.swing)
+        }
+        iosMain.dependencies {
+            // Ktor darwin
+            api(libs.ktor.client.darwin)
         }
     }
 }
