@@ -54,7 +54,7 @@ class ReviewSchemaQueryTest {
 
 
     @Test
-    fun `when reviewByTeamId is called with a valid id, then it should return a review`() =
+    fun `when reviewByTeamId is called with a valid id, then it should return a list of reviews`() =
         testApplication {
             application {
                 setupApplicationWithGraphQL()
@@ -67,6 +67,32 @@ class ReviewSchemaQueryTest {
                     """
                 {
                     "query": "query { reviewByTeamId(id: \"-1\") { name email } }"
+                }
+                """.trimIndent()
+                )
+            }
+
+            assertEquals(HttpStatusCode.NotFound, response.status)
+            val body = response.bodyAsText()
+            println(body)
+            assertTrue(body.contains("name"))
+        }
+
+
+    @Test
+    fun `when reviewByUserId is called with a valid id, then it should return a list of reviews`() =
+        testApplication {
+            application {
+                setupApplicationWithGraphQL()
+            }
+
+
+            val response = client.post("/graphql") {
+                contentType(ContentType.Application.Json)
+                setBody(
+                    """
+                {
+                    "query": "query { reviewByUserId(id: \"-1\") { name email } }"
                 }
                 """.trimIndent()
                 )

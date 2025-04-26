@@ -31,7 +31,15 @@ interface ReviewDao {
      * @param teamId The ID of the team.
      * @return A Flow of reviews belonging to the team.
      */
-    suspend fun getReviewsByTeamId(teamId: ObjectId): ReviewEntity?
+    suspend fun getReviewsByTeamId(teamId: ObjectId): List<ReviewEntity>?
+
+    /**
+     * Retrieves all reviews for a given user.
+     *
+     * @param userId The ID of the team.
+     * @return A Flow of reviews belonging to the team.
+     */
+    suspend fun getReviewsByUserId(userId: ObjectId): List<ReviewEntity>?
 
     /**
      * Updates an existing review.

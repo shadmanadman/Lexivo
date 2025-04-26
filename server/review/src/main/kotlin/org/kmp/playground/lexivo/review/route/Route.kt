@@ -36,10 +36,17 @@ class ReviewQuery : Query {
             ?: throw Exception("This id $id not found")
     }
 
-    suspend fun reviewByTeamId(id: String): ReviewResponse? {
+    suspend fun reviewByTeamId(id: String): List<ReviewResponse>? {
         return reviewRepository
             .getReviewsByTeamId(ObjectId(id))
-            ?.toResponse()
+            ?.map { it.toResponse() }
+            ?: throw Exception("This id $id not found")
+    }
+
+    suspend fun reviewByUserId(id: String): List<ReviewResponse>? {
+        return reviewRepository
+            .getReviewsByUserId(ObjectId(id))
+            ?.map { it.toResponse() }
             ?: throw Exception("This id $id not found")
     }
 

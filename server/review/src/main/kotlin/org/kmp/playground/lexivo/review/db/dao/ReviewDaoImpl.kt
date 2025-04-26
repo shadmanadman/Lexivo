@@ -45,11 +45,17 @@ class ReviewDaoImpl(val mongoDatabase: MongoDatabase) : ReviewDao {
             .find(Filters.eq("_id", id))
             .firstOrNull()
 
-    override suspend fun getReviewsByTeamId(teamId: ObjectId): ReviewEntity? =
+    override suspend fun getReviewsByTeamId(teamId: ObjectId): List<ReviewEntity>? =
         mongoDatabase.getCollection<ReviewEntity>(REVIEW_COLLECTION)
             .withDocumentClass<ReviewEntity>()
-            .find(Filters.eq("_team", teamId))
-            .firstOrNull()
+            .find(Filters.eq("_teamId", teamId))
+            .toList()
+
+    override suspend fun getReviewsByUserId(userId: ObjectId): List<ReviewEntity>? =
+        mongoDatabase.getCollection<ReviewEntity>(REVIEW_COLLECTION)
+            .withDocumentClass<ReviewEntity>()
+            .find(Filters.eq("_userId", userId))
+            .toList()
 
     override suspend fun updateReview(review: ReviewEntity): ReviewEntity? {
         try {
