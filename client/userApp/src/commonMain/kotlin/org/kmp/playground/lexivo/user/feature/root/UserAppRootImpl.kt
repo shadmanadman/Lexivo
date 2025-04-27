@@ -9,9 +9,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import org.kmp.playground.lexivo.user.feature.root.UserAppRoot.MainDestinationChild
+import org.kmp.playground.lexivo.user.feature.root.UserAppRootImpl.MainNavigationConfig
 import org.kmp.playground.lexivo.user.feature.splash.SplashComponentImpl
+import org.kmp.playground.lexivo.user.platform.isMobileDevice
 
-class UserAppRootImpl(private val componentContext: ComponentContext): UserAppRoot, ComponentContext by componentContext {
+class UserAppRootImpl(private val componentContext: ComponentContext) : UserAppRoot,
+    ComponentContext by componentContext {
 
     private val mainDispatcher = CoroutineScope(Dispatchers.Main)
 
@@ -20,7 +23,7 @@ class UserAppRootImpl(private val componentContext: ComponentContext): UserAppRo
     private val _backstack = this.childStack(
         source = navigation,
         serializer = MainNavigationConfig.serializer(),
-        initialConfiguration = MainNavigationConfig.Splash,
+        initialConfiguration = setupInitialConfigurationBasedOnPlatform(),
         handleBackButton = true,
     ) { config, context ->
         createChildFactory(
@@ -45,7 +48,8 @@ class UserAppRootImpl(private val componentContext: ComponentContext): UserAppRo
 
     private fun splashComponentBuild(
         context: ComponentContext
-    ) = SplashComponentImpl(componentContext = context,
+    ) = SplashComponentImpl(
+        componentContext = context,
         onSplashTimeFinished = {
             mainDispatcher.launch {
             }
@@ -55,7 +59,15 @@ class UserAppRootImpl(private val componentContext: ComponentContext): UserAppRo
     sealed class MainNavigationConfig {
         @Serializable
         data object Splash : MainNavigationConfig()
+
         @Serializable
         data object Landing : MainNavigationConfig()
     }
+}
+
+fun setupInitialConfigurationBasedOnPlatform(): MainNavigationConfig {
+    return if (isMobileDevice())
+        MainNavigationConfig.Splash
+    else
+        MainNavigationConfig.Landing
 }

@@ -83,6 +83,9 @@ kotlin {
             api(libs.decompose)
             api(libs.decompose.extensions)
             api(libs.decompose.essenty)
+
+            // Insetsx for controlling status bar and navigation bar
+            api(libs.insetsx)
         }
         desktopMain.dependencies {
             api(compose.desktop.currentOs)
