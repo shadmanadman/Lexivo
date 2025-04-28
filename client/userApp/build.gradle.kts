@@ -2,6 +2,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -35,7 +36,12 @@ kotlin {
     
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "userApp"
+        outputModuleName = "userApp"
+//        compilations.all {
+//            compilerOptions.configure {
+//                freeCompilerArgs.add("-Xklib-duplicated-unique-name-strategy=allow-first-with-warning")
+//            }
+//        }
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -52,9 +58,20 @@ kotlin {
         }
         binaries.executable()
     }
-    
+
+
     sourceSets {
+        val desktopMain by getting
         commonMain.dependencies {
+            implementation(projects.client.coreApp)
+        }
+        androidMain.dependencies {
+            implementation(projects.client.coreApp)
+        }
+        iosMain.dependencies {
+            implementation(projects.client.coreApp)
+        }
+        desktopMain.dependencies {
             implementation(projects.client.coreApp)
         }
     }
@@ -101,5 +118,11 @@ compose.desktop {
             packageName = "org.kmp.playground.lexivo.user"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+private fun KotlinSourceSet.dependsOnCoreApp() {
+    dependencies {
+        implementation(projects.client.coreApp)
     }
 }

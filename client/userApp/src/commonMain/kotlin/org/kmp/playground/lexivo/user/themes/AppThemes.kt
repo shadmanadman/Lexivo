@@ -14,6 +14,7 @@ class MyApplicationColors(
     val primaryColor: Color,
     val secondaryColor: Color,
     val background: Color,
+    val accent: Color,
     val yellowF7AD45: Color,
     val hardRedBB3E00: Color,
     val slitGray: Color,
@@ -141,9 +142,10 @@ fun AppTypography(): MyApplicationTypography {
 fun AppColors(darkTheme: Boolean = isSystemInDarkTheme()): MyApplicationColors {
     return if (darkTheme) {
         MyApplicationColors(
-            primaryColor = Color(0xFFA2B9A7),
-            secondaryColor = Color(0xFF657C6A),
-            background = Color(0xFFF6FEFF),
+            primaryColor = Color(0xFFA55B4B),
+            secondaryColor = Color(0xFF4F1C51),
+            background = Color(0xFF210F37),
+            accent = Color(0xFFDCA06D),
             yellowF7AD45 = Color(0xFF201F20),
             hardRedBB3E00 = Color(0xFF6E6E6E),
             slitGray = Color(0xFFD3D3D3),
@@ -165,9 +167,10 @@ fun AppColors(darkTheme: Boolean = isSystemInDarkTheme()): MyApplicationColors {
         )
     } else {
         MyApplicationColors(
-            primaryColor = Color(0xFFDCA06D),
-            secondaryColor = Color(0xFFA55B4B),
+            primaryColor = Color(0xFFA55B4B),
+            secondaryColor = Color(0xFF4F1C51),
             background = Color(0xFF210F37),
+            accent = Color(0xFFDCA06D),
             yellowF7AD45 = Color(0xFF201F20),
             hardRedBB3E00 = Color(0xFF6E6E6E),
             slitGray = Color(0xFFD3D3D3),
