@@ -139,8 +139,8 @@ fun AppTypography(): MyApplicationTypography {
  * [MyApplicationColors.slitGray] is #D3D3D3
  */
 @Composable
-fun AppColors(darkTheme: Boolean = isSystemInDarkTheme()): MyApplicationColors {
-    return if (darkTheme) {
+fun AppColors(): MyApplicationColors {
+    return if (isSystemInDarkTheme()) {
         MyApplicationColors(
             primaryColor = Color(0xFFA55B4B),
             secondaryColor = Color(0xFF4F1C51),

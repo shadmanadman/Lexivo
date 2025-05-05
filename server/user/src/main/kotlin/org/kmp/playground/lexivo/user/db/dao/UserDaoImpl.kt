@@ -24,10 +24,10 @@ class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
             .firstOrNull()
 
 
-    override suspend fun insertOne(artists: UserEntity): String? {
+    override suspend fun insertOne(user: UserEntity): String? {
         try {
             val result = mongoDatabase.getCollection<UserEntity>(USER_COLLECTION).insertOne(
-                artists
+                user
             )
 
             return result.insertedId?.asObjectId()?.value.toString()
@@ -50,19 +50,19 @@ class UserDaoImpl(private val mongoDatabase: MongoDatabase) : UserDao {
         return "-1"
     }
 
-    override suspend fun updateOne(objectId: ObjectId, artists: UserEntity): String {
+    override suspend fun updateOne(objectId: ObjectId, user: UserEntity): String {
         try {
             val query = Filters.eq("_id", objectId)
             val updates = Updates.combine(
-                Updates.set(UserEntity::name.name, artists.name),
-                Updates.set(UserEntity::email.name, artists.email),
-                Updates.set(UserEntity::provider.name, artists.provider),
-                Updates.set(UserEntity::avatar.name, artists.avatar),
-                Updates.set(UserEntity::providerId.name, artists.providerId),
-                Updates.set(UserEntity::role.name, artists.role),
-                Updates.set(UserEntity::hashedPassword.name, artists.hashedPassword),
-                Updates.set(UserEntity::teamId.name, artists.teamId),
-                Updates.set(UserEntity::updatedAt.name, artists.updatedAt)
+                Updates.set(UserEntity::name.name, user.name),
+                Updates.set(UserEntity::email.name, user.email),
+                Updates.set(UserEntity::provider.name, user.provider),
+                Updates.set(UserEntity::avatar.name, user.avatar),
+                Updates.set(UserEntity::providerId.name, user.providerId),
+                Updates.set(UserEntity::role.name, user.role),
+                Updates.set(UserEntity::hashedPassword.name, user.hashedPassword),
+                Updates.set(UserEntity::teamId.name, user.teamId),
+                Updates.set(UserEntity::updatedAt.name, user.updatedAt)
             )
 
             val options = UpdateOptions().upsert(true)

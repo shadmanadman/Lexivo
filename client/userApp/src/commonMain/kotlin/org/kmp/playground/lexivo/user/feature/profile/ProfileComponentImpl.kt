@@ -1,4 +1,4 @@
-package org.kmp.playground.lexivo.user.feature.user
+package org.kmp.playground.lexivo.user.feature.profile
 
 import com.arkivanov.decompose.ComponentContext
 

@@ -2,4 +2,11 @@
     <string name="app_name">Lexivo</string>
     <string name="its_all_free_try_it">It's all FREE, try it</string>
     <string name="Lexivo_Your_AI_Partner_for_Perfecting_Every_Message">_Lexivo: Your AI Partner for Perfecting Every Message._</string>
+
+    <string name="home">home</string>
+    <string name="profile">Profile</string>
+    <string name="team">Team</string>
+    <string name="history">History</string>
+
+
 </resources>

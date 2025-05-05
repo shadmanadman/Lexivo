@@ -34,7 +34,7 @@ kotlin {
     
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "coreApp"
+        outputModuleName = "coreApp"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -62,7 +62,7 @@ kotlin {
         commonMain.dependencies {
             api(compose.runtime)
             api(compose.foundation)
-            api(compose.material)
+            api(compose.material3)
             api(compose.ui)
             api(compose.components.resources)
             api(compose.components.uiToolingPreview)
@@ -85,7 +85,10 @@ kotlin {
             api(libs.decompose.essenty)
 
             // Insetsx for controlling status bar and navigation bar
-            api(libs.insetsx)
+            //api(libs.insetsx)
+
+            // Kamel
+            api(libs.kamel.image)
         }
         desktopMain.dependencies {
             api(compose.desktop.currentOs)

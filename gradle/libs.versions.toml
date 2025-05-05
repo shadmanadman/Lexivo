@@ -1,6 +1,6 @@
 [versions]
 agp = "8.9.2"
-android-compileSdk = "35"
+android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
 androidx-activityCompose = "1.10.1"
@@ -14,6 +14,7 @@ androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.3"
 junit = "4.13.2"
 kotlin = "2.1.20"
+kamel = "1.0.3"
 kotlinx-coroutines = "1.10.2"
 ktor = "3.1.2"
 logback = "1.5.18"
@@ -50,6 +51,10 @@ decompose-essenty = {module="com.arkivanov.essenty:lifecycle",version.ref = "dec
 
 # Gson
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
+# Kamel
+kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+
 
 #Ktor client
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }

@@ -37,11 +37,6 @@ kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         outputModuleName = "userApp"
-//        compilations.all {
-//            compilerOptions.configure {
-//                freeCompilerArgs.add("-Xklib-duplicated-unique-name-strategy=allow-first-with-warning")
-//            }
-//        }
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -50,6 +45,7 @@ kotlin {
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                     static = (static ?: mutableListOf()).apply {
                         // Serve sources to debug inside browser
+                        add("${layout.buildDirectory}/processedResources/wasmJs/main")
                         add(rootDirPath)
                         add(projectDirPath)
                     }
@@ -118,11 +114,5 @@ compose.desktop {
             packageName = "org.kmp.playground.lexivo.user"
             packageVersion = "1.0.0"
         }
-    }
-}
-
-private fun KotlinSourceSet.dependsOnCoreApp() {
-    dependencies {
-        implementation(projects.client.coreApp)
     }
 }

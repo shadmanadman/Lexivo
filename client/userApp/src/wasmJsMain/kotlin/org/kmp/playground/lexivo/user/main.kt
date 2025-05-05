@@ -14,8 +14,6 @@ fun main() {
         val lifecycle = LifecycleRegistry()
 
         val root = UserAppRootImpl(componentContext = DefaultComponentContext(lifecycle))
-        ComposeViewport(document.body!!) {
-            CoreApp(root = root)
-        }
+        CoreApp(root = root)
     }
 }

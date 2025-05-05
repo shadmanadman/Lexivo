@@ -13,14 +13,13 @@ fun main() = application {
 
     val root = UserAppRootImpl(componentContext = DefaultComponentContext(lifecycle))
 
-    application {
 
-        Window(
-            onCloseRequest = ::exitApplication,
-            title = "KMP-EventManagementFullStack",
-        ) {
+    Window(
+        onCloseRequest = ::exitApplication,
+        title = "KMP-EventManagementFullStack",
+    ) {
 
-            CoreApp(root = root)
-        }
+        CoreApp(root = root)
     }
+
 }

@@ -11,29 +11,27 @@ import org.kmp.playground.lexivo.user.feature.history.HistoryComponentImpl
 import org.kmp.playground.lexivo.user.feature.landing.LandingComponentImpl
 import org.kmp.playground.lexivo.user.feature.main.state.NavigationMenuState
 import org.kmp.playground.lexivo.user.feature.main.viewmodel.NavigationMenuViewModel
-import org.kmp.playground.lexivo.user.feature.root.UserAppRoot
-import org.kmp.playground.lexivo.user.feature.root.UserAppRootImpl
 import org.kmp.playground.lexivo.user.feature.team.TeamComponentImpl
-import org.kmp.playground.lexivo.user.feature.user.ProfileComponentImpl
+import org.kmp.playground.lexivo.user.feature.profile.ProfileComponentImpl
 
 const val PAGE_KEY_BOTTOM_NAV = "bottomNavPageKey"
 
-class NavigationMenuComponentImpl(val componentContext: ComponentContext) :
-    ComponentContext by componentContext, NavigationMenuComponent {
+class MainNavigationMenuComponentImpl(val componentContext: ComponentContext) :
+    ComponentContext by componentContext, MainNavigationMenuComponent {
 
 
-    private val navigation = StackNavigation<BottomNavConfig>()
+    private val navigation = StackNavigation<MainNavMenuConfig>()
 
     private val _pages =
         childStack(
             source = navigation,
-            serializer = BottomNavConfig.serializer(),
-            initialConfiguration = BottomNavConfig.Landing,
+            serializer = MainNavMenuConfig.serializer(),
+            initialConfiguration = MainNavMenuConfig.Landing,
             handleBackButton = true,
             childFactory = ::createChildPageFactor,
             key = PAGE_KEY_BOTTOM_NAV
         )
-    override val pages: Value<ChildStack<*, NavigationMenuComponent.BottomNavChild>> get() = _pages
+    override val pages: Value<ChildStack<*, MainNavigationMenuComponent.MainNavMenuChild>> get() = _pages
 
     override val bottomNavViewModel: NavigationMenuViewModel
         get() = instanceKeeper.getOrCreate { NavigationMenuViewModel() }
@@ -63,46 +61,46 @@ class NavigationMenuComponentImpl(val componentContext: ComponentContext) :
     }
 
     private fun createChildPageFactor(
-        config: BottomNavConfig,
+        config: MainNavMenuConfig,
         componentContext: ComponentContext
-    ): NavigationMenuComponent.BottomNavChild {
+    ): MainNavigationMenuComponent.MainNavMenuChild {
         return when (config) {
-            BottomNavConfig.History -> historyComponentBuild(componentContext)
-            BottomNavConfig.Landing -> landingComponentBuild(componentContext)
-            BottomNavConfig.Team -> teamComponentBuild(componentContext)
-            BottomNavConfig.Profile -> profileComponentBuild(componentContext)
+            MainNavMenuConfig.History -> historyComponentBuild(componentContext)
+            MainNavMenuConfig.Landing -> landingComponentBuild(componentContext)
+            MainNavMenuConfig.Team -> teamComponentBuild(componentContext)
+            MainNavMenuConfig.Profile -> profileComponentBuild(componentContext)
         }
     }
 
     fun landingComponentBuild(
         context: ComponentContext
-    ) = NavigationMenuComponent.BottomNavChild.Landing(LandingComponentImpl(componentContext = context))
+    ) = MainNavigationMenuComponent.MainNavMenuChild.Landing(LandingComponentImpl(componentContext = context))
 
     fun historyComponentBuild(
         context: ComponentContext
-    ) =NavigationMenuComponent.BottomNavChild.History(HistoryComponentImpl(componentContext = context))
+    ) =MainNavigationMenuComponent.MainNavMenuChild.History(HistoryComponentImpl(componentContext = context))
 
     fun teamComponentBuild(
         context: ComponentContext
-    ) = NavigationMenuComponent.BottomNavChild.Team(TeamComponentImpl(componentContext = context))
+    ) = MainNavigationMenuComponent.MainNavMenuChild.Team(TeamComponentImpl(componentContext = context))
 
 
     fun profileComponentBuild(
         context: ComponentContext
-    ) = NavigationMenuComponent.BottomNavChild.Profile(ProfileComponentImpl(componentContext = context))
+    ) = MainNavigationMenuComponent.MainNavMenuChild.Profile(ProfileComponentImpl(componentContext = context))
 
     @Serializable
-    sealed class BottomNavConfig {
+    sealed class MainNavMenuConfig {
         @Serializable
-        data object Landing : BottomNavConfig()
+        data object Landing : MainNavMenuConfig()
 
         @Serializable
-        data object History : BottomNavConfig()
+        data object History : MainNavMenuConfig()
 
         @Serializable
-        data object Team : BottomNavConfig()
+        data object Team : MainNavMenuConfig()
 
         @Serializable
-        data object Profile : BottomNavConfig()
+        data object Profile : MainNavMenuConfig()
     }
 }

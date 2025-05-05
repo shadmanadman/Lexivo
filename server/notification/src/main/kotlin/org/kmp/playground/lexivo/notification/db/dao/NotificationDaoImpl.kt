@@ -21,10 +21,10 @@ class NotificationDaoImpl(val mongoDatabase: MongoDatabase): NotificationDao {
             .find(Filters.eq("recipientIds", recipientIds)).toList()
 
 
-    override suspend fun insertNotification(team: NotificationEntity): NotificationEntity? {
+    override suspend fun insertNotification(notification: NotificationEntity): NotificationEntity? {
         try {
             val result = mongoDatabase.getCollection<NotificationEntity>(NOTIFICATION_COLLECTION).insertOne(
-                team
+                notification
             )
 
             return result.insertedId?.asObjectId()?.value?.let { objectId ->

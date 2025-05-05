@@ -6,33 +6,32 @@ import org.kmp.playground.lexivo.user.feature.history.HistoryComponent
 import org.kmp.playground.lexivo.user.feature.landing.LandingComponent
 import org.kmp.playground.lexivo.user.feature.main.state.NavigationMenuState
 import org.kmp.playground.lexivo.user.feature.main.viewmodel.NavigationMenuViewModel
-import org.kmp.playground.lexivo.user.feature.root.UserAppRootImpl
 import org.kmp.playground.lexivo.user.feature.team.TeamComponent
-import org.kmp.playground.lexivo.user.feature.user.ProfileComponent
+import org.kmp.playground.lexivo.user.feature.profile.ProfileComponent
 
-interface NavigationMenuComponent {
+interface MainNavigationMenuComponent {
 
-    val pages: Value<ChildStack<*, BottomNavChild>>
+    val pages: Value<ChildStack<*, MainNavMenuChild>>
 
     val bottomNavViewModel: NavigationMenuViewModel
 
     fun onState(state: NavigationMenuState)
 
-    sealed interface BottomNavChild {
+    sealed interface MainNavMenuChild {
         data class Landing(
             val component: LandingComponent,
-        ) : BottomNavChild
+        ) : MainNavMenuChild
 
         data class History(
             val component: HistoryComponent,
-        ) : BottomNavChild
+        ) : MainNavMenuChild
 
         data class Team(
             val component: TeamComponent,
-        ) : BottomNavChild
+        ) : MainNavMenuChild
 
         data class Profile(
             val component: ProfileComponent,
-        ) : BottomNavChild
+        ) : MainNavMenuChild
     }
 }
