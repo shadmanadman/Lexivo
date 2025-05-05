@@ -1,5 +1,6 @@
 package org.kmp.playground.lexivo.core.resources
 
+import androidx.compose.runtime.Composable
 import lexivo.client.coreapp.generated.resources.Lexivo_Your_AI_Partner_for_Perfecting_Every_Message
 import lexivo.client.coreapp.generated.resources.Res
 import lexivo.client.coreapp.generated.resources.app_name
@@ -8,6 +9,8 @@ import lexivo.client.coreapp.generated.resources.home
 import lexivo.client.coreapp.generated.resources.its_all_free_try_it
 import lexivo.client.coreapp.generated.resources.profile
 import lexivo.client.coreapp.generated.resources.team
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 object StringShared {
     val app_name = Res.string.app_name
@@ -19,3 +22,6 @@ object StringShared {
     val team = Res.string.team
     val history = Res.string.history
 }
+
+@Composable
+fun StringResource.asString() = stringResource(this)

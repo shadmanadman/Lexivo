@@ -58,6 +58,7 @@ kotlin {
         androidMain.dependencies {
             api(compose.preview)
             api(libs.androidx.activity.compose)
+            api(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             api(compose.runtime)

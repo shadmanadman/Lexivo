@@ -33,10 +33,10 @@ fun MainBottomBarElement(
                     spotColor = Color(0x1A000000),
                     ambientColor = Color(0x1A000000)
                 ),
-            containerColor = AppColors().background,
+            containerColor = AppColors().white,
             actions = {
                 screens.forEach { screen ->
-                    MenuBar(screen, currentStack, onScreenSelected = {
+                    MenuBar(Modifier.weight(1f),screen, currentStack, onScreenSelected = {
                         selectedItem = it.id
                     })
                 }
@@ -59,5 +59,5 @@ fun MenuTintColor(
     return if (screensBottom.id.matchesMainNavMenuChild(current))
         AppColors().accent
     else
-        AppColors().slitGray
+        AppColors().black000000
 }

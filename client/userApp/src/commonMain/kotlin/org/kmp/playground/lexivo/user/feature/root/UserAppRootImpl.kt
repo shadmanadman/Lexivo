@@ -3,6 +3,7 @@ package org.kmp.playground.lexivo.user.feature.root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.replaceCurrent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,6 +59,7 @@ class UserAppRootImpl(private val componentContext: ComponentContext) : UserAppR
             componentContext = context,
             onSplashTimeFinished = {
                 mainDispatcher.launch {
+                    navigation.replaceCurrent(configuration = MainNavigationConfig.MainNavigationMenu)
                 }
             })
     )

@@ -26,6 +26,7 @@ fun SplashScreen(component: SplashComponent) {
         }
 
         is UIState.Finished -> {
+            component.onSplashTimeFinish()
         }
     }
 }

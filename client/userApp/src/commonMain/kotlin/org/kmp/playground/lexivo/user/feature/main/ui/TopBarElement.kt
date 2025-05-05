@@ -30,7 +30,7 @@ fun TopBarElement(
         topBar = {
             TopAppBar(title = {}, actions = {
                 screens.forEach { screen ->
-                    MenuBar(screen, currentStack, onScreenSelected = {
+                    MenuBar(Modifier.weight(1f),screen, currentStack, onScreenSelected = {
                         selectedItem = it.id
                     })
                 }

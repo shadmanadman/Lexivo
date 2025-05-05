@@ -25,6 +25,7 @@ decompose = "3.3.0"
 decompose-essenty = "2.5.0"
 insetsx = "0.1.0-alpha10"
 startupRuntime = "1.2.1"
+coil = "3.1.0"
 
 [libraries]
 ##---------------> Client
@@ -55,6 +56,9 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 # Kamel
 kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 
+# Coil
+coil-compose = {module = "io.coil-kt.coil3:coil-compose", version.ref = "coil"}
+coil-netwrok = {module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil"}
 
 #Ktor client
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }

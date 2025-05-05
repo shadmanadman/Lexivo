@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,6 +29,8 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 
 import org.jetbrains.compose.resources.StringResource
 import org.kmp.playground.lexivo.core.resources.StringShared
@@ -38,6 +41,8 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.InternalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.kmp.playground.lexivo.core.resources.DrawableShared
+import org.kmp.playground.lexivo.core.resources.asDrawable
+import org.kmp.playground.lexivo.core.resources.asString
 import org.kmp.playground.lexivo.user.feature.history.ui.HistoryScreen
 import org.kmp.playground.lexivo.user.feature.landing.ui.LandingScreen
 import org.kmp.playground.lexivo.user.feature.profile.ui.ProfileScreen
@@ -122,12 +127,13 @@ fun MainNavMenuScreen(component: MainNavigationMenuComponent) {
 @OptIn(InternalResourceApi::class)
 @Composable
 fun MenuBar(
+    modifier: Modifier,
     screen: BottomNavScreensState,
     currentStack: MainNavigationMenuComponent.MainNavMenuChild,
     onScreenSelected: (BottomNavScreensState) -> Unit
 ) {
     Column(
-        modifier = Modifier.clickable(
+        modifier = modifier.clickable(
             interactionSource = MutableInteractionSource(),
             indication = null,
             onClick = {
@@ -145,7 +151,7 @@ fun MenuBar(
             )
         else
             Image(
-                painter = painterResource(screen.icon?: DrawableShared.empty),
+                painter = painterResource(screen.icon ?: DrawableShared.empty),
                 contentDescription = "",
                 colorFilter = ColorFilter.tint(
                     MenuTintColor(
@@ -158,7 +164,7 @@ fun MenuBar(
         // Show the label
         if (screen.title != null)
             Text(
-                text = stringResource(screen.title),
+                text = screen.title.asString(),
                 color = MenuTintColor(screen, currentStack),
                 style = AppTypography().body12
             )
@@ -195,11 +201,13 @@ fun ProfileBottomNavIcon(tintColor: Color, avatar: String) {
             .background(Color.Transparent),
         contentAlignment = Alignment.Center
     ) {
-//        KamelImage(modifier = Modifier.size(47.dp),
-//            painter = asyncPainterResource(avatar),
-//            contentDescription = "",
-//            onLoading = { progress -> },
-//            onFailure = {  })
+        KamelImage(
+            modifier = Modifier.size(47.dp),
+            resource = { asyncPainterResource(avatar) },
+            contentDescription = "",
+            onLoading = { progress ->
+            },
+            onFailure = { Image(DrawableShared.profile.asDrawable(), "") })
     }
 }
 
