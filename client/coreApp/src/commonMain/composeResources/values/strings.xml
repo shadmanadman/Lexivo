@@ -8,9 +8,9 @@
     <string name="team">Team</string>
     <string name="history">History</string>
 
-    <string name="angry_tune">Mad😡</string>
-    <string name="happy_tune">Happy🙂</string>
-    <string name="professional_tune">Pro💼</string>
-    <string name="funny_tune">Fun🤪</string>
+    <string name="angry_tune">Mad</string>
+    <string name="happy_tune">Happy</string>
+    <string name="professional_tune">Pro</string>
+    <string name="funny_tune">Fun</string>
 
 </resources>

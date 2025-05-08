@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -133,14 +134,15 @@ fun MenuBar(
     onScreenSelected: (BottomNavScreensState) -> Unit
 ) {
     Column(
-        modifier = modifier.clickable(
-            interactionSource = MutableInteractionSource(),
-            indication = null,
-            onClick = {
-                onScreenSelected(screen)
-                screen.openScreen()
-            },
-        ).height(80.dp),
+        modifier = modifier
+            .clickable(
+                interactionSource = MutableInteractionSource(),
+                indication = null,
+                onClick = {
+                    onScreenSelected(screen)
+                    screen.openScreen()
+                },
+            ).height(80.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {

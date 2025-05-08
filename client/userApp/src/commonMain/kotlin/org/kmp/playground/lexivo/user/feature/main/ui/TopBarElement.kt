@@ -2,6 +2,7 @@ package org.kmp.playground.lexivo.user.feature.main.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
@@ -11,6 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.dp
 import org.kmp.playground.lexivo.user.feature.main.MainNavigationMenuComponent
 import org.kmp.playground.lexivo.user.themes.AppColors
 
@@ -28,7 +31,7 @@ fun TopBarElement(
         modifier = Modifier.fillMaxSize(),
         containerColor = AppColors().background,
         topBar = {
-            TopAppBar(title = {}, actions = {
+            TopAppBar(modifier = Modifier.clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)), title = {}, actions = {
                 screens.forEach { screen ->
                     MenuBar(Modifier.weight(1f),screen, currentStack, onScreenSelected = {
                         selectedItem = it.id
