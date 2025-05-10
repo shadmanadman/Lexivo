@@ -8,6 +8,7 @@ import lexivo.client.coreapp.generated.resources.ic_happy
 import lexivo.client.coreapp.generated.resources.ic_smiley
 import lexivo.client.coreapp.generated.resources.ic_suitcase
 import lexivo.client.coreapp.generated.resources.icon_profile
+import lexivo.client.coreapp.generated.resources.landing_background
 import lexivo.client.coreapp.generated.resources.mesh_gradiant_background
 import lexivo.client.coreapp.generated.resources.mesh_gradiant_red_blue
 import lexivo.client.coreapp.generated.resources.mesh_gradiant_yellow_purple
@@ -23,6 +24,7 @@ object DrawableShared {
     val ic_mad = Res.drawable.ic_angry
     val mesh_gradiant_red_blue = Res.drawable.mesh_gradiant_red_blue
     val mesh_gradiant_background = Res.drawable.mesh_gradiant_background
+    val landing_background = Res.drawable.landing_background
 }
 
 @Composable
