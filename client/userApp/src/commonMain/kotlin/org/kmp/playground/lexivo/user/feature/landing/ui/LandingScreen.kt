@@ -15,11 +15,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +30,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -70,11 +77,14 @@ fun LandingPreview() {
                 textAlign = TextAlign.Center,
                 text = stringResource(StringShared.Lexivo_Your_AI_Partner_for_Perfecting_Every_Message),
                 color = AppColors().white,
-                style = AppTypography().title18.copy(fontSize = landingTitleSize(), fontWeight = FontWeight.Bold)
+                style = AppTypography().title18.copy(
+                    fontSize = landingTitleSize(),
+                    fontWeight = FontWeight.Bold
+                )
             )
 
             OutlinedTextField(
-                modifier = Modifier.padding(16.dp).fillMaxWidth()
+                modifier = Modifier.padding(top = 16.dp, start = 60.dp, end = 60.dp).fillMaxWidth()
                     .defaultMinSize(minHeight = 200.dp),
                 shape = RoundedCornerShape(18.dp),
                 value = inputMessage,
@@ -82,11 +92,54 @@ fun LandingPreview() {
                     inputMessage = inputText
                 },
                 label = {
-                    Text(text = "Put your message, text, email")
+                    Text(text = "Put your message, text, email", color = Color.White)
                 })
             TuningOptions()
-
+            GenerateButton(onClick = {})
+            ConvertedText("")
         }
+    }
+}
+
+@Composable
+fun GenerateButton(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .clickable(onClick = onClick)
+            .padding(top = 18.dp)
+            .size(width = 180.dp, height = 50.dp)
+            .clip(shape = RoundedCornerShape(25.dp))
+            .background(
+                brush = androidx.compose.ui.graphics.Brush.verticalGradient(
+                    listOf(Color(0xFF22C1C3), Color(0xFFFDBB2D)), tileMode = TileMode.Clamp
+                )
+            )
+    ) {
+        Box(
+            modifier = Modifier.padding(start = 8.dp).size(40.dp).clip(CircleShape)
+                .border(width = 1.dp, color = AppColors().grayFAFAFA, shape = CircleShape)
+                .align(Alignment.CenterStart)
+        ) {
+            Image(painter = painterResource(DrawableShared.ic_magic), contentDescription = "")
+        }
+        Text(
+            modifier = Modifier.padding(start = 12.dp).align(Alignment.Center),
+            text = "Generate",
+            color = AppColors().white,
+            style = AppTypography().title18
+        )
+    }
+}
+
+@Composable
+fun ConvertedText(text: String) {
+    Box(
+        modifier = Modifier.padding(top = 16.dp, start = 60.dp, end = 60.dp).fillMaxWidth().defaultMinSize(minHeight = 200.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(12.dp))
+
+    ) {
+        Text(text = text, color = Color.Black)
     }
 }
 
@@ -161,7 +214,7 @@ fun GradiantFlow() {
 
 
 @Composable
-fun GradiantBackground(){
+fun GradiantBackground() {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.fillMaxSize(),
@@ -173,6 +226,6 @@ fun GradiantBackground(){
 }
 
 
-fun landingTitleSize(): TextUnit{
+fun landingTitleSize(): TextUnit {
     return if (isMobileDevice()) 18.sp else 38.sp
 }
