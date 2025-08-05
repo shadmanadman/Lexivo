@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import lexivo.client.coreapp.generated.resources.Res
 import lexivo.client.coreapp.generated.resources.empty
 import lexivo.client.coreapp.generated.resources.ic_angry
+import lexivo.client.coreapp.generated.resources.ic_google
 import lexivo.client.coreapp.generated.resources.ic_happy
 import lexivo.client.coreapp.generated.resources.ic_magic
 import lexivo.client.coreapp.generated.resources.ic_smiley
@@ -27,6 +28,7 @@ object DrawableShared {
     val mesh_gradiant_background = Res.drawable.mesh_gradiant_background
     val landing_background = Res.drawable.landing_background
     val ic_magic = Res.drawable.ic_magic
+    val ic_google = Res.drawable.ic_google
 }
 
 @Composable
